@@ -1,75 +1,78 @@
-# Nuxt Minimal Starter
+# AI Dev Day 2026 Playground
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+[AI Dev Day 2026](https://aidevday.com/) のセッション・コミュニティ紹介ページ集です。
+GitHub Actions で静的サイトとして生成し、GitHub Pages にデプロイされます。
 
-## Setup
+## 技術スタック
 
-Make sure to install dependencies:
+- [Nuxt 4](https://nuxt.com/)（Vue 3 / vue-router）
+- [@nuxtjs/tailwindcss](https://tailwindcss.nuxtjs.org/)
+- [Vite+](https://viteplus.dev/)（`vp` CLI によるフォーマット・リント・型チェック）
+- パッケージマネージャー: pnpm（`devEngines` で自動解決）
+
+## ページ構成
+
+| パス                                       | 内容                                                       |
+| ------------------------------------------ | ---------------------------------------------------------- |
+| `/`                                        | トップページ（各ページへのリンク一覧）                     |
+| `/sessions/github-dockyard-vs-code-meetup` | セッション: GitHub dockyard Radio & VS Code Monthly Update |
+| `/communities/github-dockyard`             | コミュニティ: GitHub dockyard                              |
+| `/communities/vs-code-meetup`              | コミュニティ: VS Code Meetup                               |
+
+## ディレクトリ構成
+
+| パス                                                   | 内容                                                                   |
+| ------------------------------------------------------ | ---------------------------------------------------------------------- |
+| [`app/data/`](./app/data)                              | 表示コンテンツ（イベント情報・コミュニティ・セッション）の定義         |
+| [`app/pages/`](./app/pages)                            | ページ。コミュニティページは `communities/[slug].vue` でデータから生成 |
+| [`app/layouts/default.vue`](./app/layouts/default.vue) | 共通ヘッダー・フッターを含むレイアウト                                 |
+| [`app/components/`](./app/components)                  | 共通 UI パーツ（ヘッダー、フッター、見出し、リンクピルなど）           |
+| [`app/composables/`](./app/composables)                | `usePageSeo` などの composable                                         |
+| [`app/utils/`](./app/utils)                            | アクセントカラーのクラス定義など                                       |
+
+コミュニティを追加する場合は [`app/data/communities.ts`](./app/data/communities.ts) の `communities` 配列にエントリを追加するだけで、ページとトップページのリンクが生成されます。
+
+## セットアップ
+
+依存関係をインストールします:
 
 ```bash
-# npm
-npm install
-
-# pnpm
 pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+# または
+vp install
 ```
 
-## Development Server
+## 開発サーバー
 
-Start the development server on `http://localhost:3000`:
+`http://localhost:3000` で開発サーバーを起動します:
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
 pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+## 検証
 
-Build the application for production:
+フォーマット・リント・型チェックを実行します:
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+vp check        # チェックのみ
+vp check --fix  # 自動修正あり
 ```
 
-Locally preview production build:
+## ビルド / プレビュー
+
+静的サイトを生成します（出力先: `.output/public`）:
 
 ```bash
-# npm
-npm run preview
+pnpm generate
+```
 
-# pnpm
+生成結果をローカルでプレビューします:
+
+```bash
 pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## デプロイ
+
+`main` ブランチへの push をトリガーに、GitHub Actions（[`deploy-pages.yml`](./.github/workflows/deploy-pages.yml)）が `pnpm generate` で静的サイトを生成し、GitHub Pages へ自動デプロイします。ベースパスはリポジトリ名（`NUXT_APP_BASE_URL=/ai-dev-day-2026-playground/`）に設定されます。
