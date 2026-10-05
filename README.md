@@ -59,6 +59,10 @@ vp check        # チェックのみ
 vp check --fix  # 自動修正あり
 ```
 
+### CI
+
+Pull Request と `main` への push をトリガーに、GitHub Actions（[`ci.yml`](./.github/workflows/ci.yml)）が `vp check` と `vp run generate` を実行します。
+
 ## ビルド / プレビュー
 
 静的サイトを生成します（出力先: `.output/public`）:
