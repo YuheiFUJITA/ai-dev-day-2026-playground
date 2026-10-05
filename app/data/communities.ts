@@ -31,6 +31,8 @@ export interface Community {
   image: string;
   accent: Accent;
   hashtag: Link;
+  /** 発足年月（例: "2019.12"） */
+  founded: string;
   description: string;
   seoDescription: string;
   stats: Stat[];
@@ -141,6 +143,7 @@ export const vsCodeMeetup: Community = {
   image: "https://aidevday.com/images/speakers/vs-code-meetup.webp",
   accent: "sky",
   hashtag: { label: "#vscodejp", url: "https://x.com/hashtag/vscodejp" },
+  founded: "2019.12",
   description:
     "強力かつ軽量なオープンソースのコードエディター「Visual Studio Code」の日本コミュニティ。2019年12月の発足以来、毎回テーマを設定したミートアップを積み重ね、1 Dayイベント『VS Code Conference Japan』を複数回開催しているほか、毎月月初に1ヶ月分のVS Codeのリリースノートをわいわいと振り返る配信イベント「VS Code Monthly Update」を開催している。",
   seoDescription:

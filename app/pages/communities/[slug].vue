@@ -31,6 +31,9 @@ usePageSeo(`${community.name} | Community | AI Dev Day 2026`, community.seoDescr
           <h1 class="text-3xl font-extrabold leading-snug text-white sm:text-5xl">
             {{ community.name }}
           </h1>
+          <p class="mt-3 text-xs font-bold tracking-widest text-zinc-500">
+            SINCE {{ community.founded }}
+          </p>
           <p class="mt-6 max-w-2xl leading-relaxed text-zinc-300">
             {{ community.description }}
           </p>
